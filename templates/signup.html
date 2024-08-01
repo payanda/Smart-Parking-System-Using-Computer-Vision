@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<header class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 offset-xl-1">
+                <h1 class="text-center">Sign Up</h1>
+            </div>
+            <!-- end of col -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <!-- end of container -->
+</header>
+<!-- end of ex-header -->
+<!-- end of header -->
+
+
+
+<!-- Basic -->
+<div class="ex-form-1 pt-5 pb-5" style="background-image: url(../static/images/form.svg); background-size: cover; background-repeat: no-repeat;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 offset-xl-3">
+                <div class="text-box mt-5 mb-5">
+                    <p class="mb-4">Fill out the form below to sign up for the service. Already signed up? Then just <a
+                            class="blue" href="{{url_for('login')}}">Log In</a></p>
+
+                    <!-- Sign Up Form -->
+                    <form id="signupForm" action="{{url_for('signup')}}" method="post">
+
+
+                        <!-- Email Address -->
+                        <div class="mb-4 form-floating">
+                            <input type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="name@example.com">
+                            <label for="email">Email address</label>
+                            <p class="text-danger" id="floatingInput_error"></p>
+                        </div>
+
+
+                        <!-- Name -->
+                        <div class="mb-4 form-floating">
+                            <input type="text"
+                            class="form-control" 
+                            id="name"
+                            name="name"
+                            placeholder="Your name">
+                            <label for="name">Your Full name</label>
+                            <p class="text-danger" id="floatingInput2_error"></p>
+                        </div>
+
+
+                        <!-- Password -->
+                        <div class="mb-4 form-floating">
+                            <input type="password" 
+                            class="form-control" 
+                            id="password"
+                            name="password"
+                            placeholder="Password">
+                            <label for="password">Password</label>
+                            <p class="text-danger" id="floatingPassword_error"></p>
+
+                        </div>
+
+
+                        <!-- Privacy & Terms  Checkbox Button-->
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" class="form-check-input" id="check" name="check">
+                            <label class="form-check-label" for="check">I agree with the site's stated <a
+                                    href="{{ url_for('services') }}">Privacy Policy</a> and <a href="{{ url_for('terms') }}">Terms &
+                                    Conditions</a></label>
+                        </div>
+                        <p class="text-danger" id="exampleCheck1_error"></p>
+
+                        <!-- Submit Button  -->
+                        <button type="submit" class="form-control-submit-button">Sign up</button>
+                    </form>
+                    <!-- end of sign up form -->
+
+                </div>
+                <!-- end of text-box -->
+            </div>
+            <!-- end of col -->
+        </div>
+        <!-- end of row -->
+    </div>
+    <!-- end of container -->
+</div>
+<!-- end of ex-basic-1 -->
+<!-- end of basic -->
+
+
+{% endblock %}

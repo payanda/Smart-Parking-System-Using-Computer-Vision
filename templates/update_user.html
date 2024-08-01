@@ -1,0 +1,101 @@
+{% if current_user.is_admin %}
+{% extends "base2.html" %}
+
+{% block title %} update User {% endblock %}
+
+{% block left_title %}
+<h2>Update User Information </h2>
+{% endblock %}
+
+
+
+{% block img %}
+<img class="img-fluid" src="{{url_for('static', filename='images/details.svg')}}" id="left_icon">
+{% endblock %}
+
+
+{% block right_centent %}
+<h3>Update Users Informations</h3>
+{% endblock %}
+{% block button %}
+<!-- Button to Submit the form -->
+<button type="ubmit" class="btn btn-lg btn-outline-success my_shadow" form="update_user_form">
+    Update
+</button>
+{% endblock %}
+
+{% block table %}
+<form action="{{url_for('update_user', id=user.id)}}" method="post" id="update_user_form">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Full Name  -->
+                <div class="mb-4 form-floating">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required
+                        value="{{user.name}}">
+                    <label for="name">Full Name <span class="needed">*</span></label>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Email Address  -->
+                <div class="mb-4 form-floating">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Emaill Address"
+                        required value="{{user.email}}">
+                    <label for="email">Email Address <span class="needed">*</span></label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col">
+                <!-- Email Address  -->
+                <div class="mb-4 form-floating">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                        required>
+                    <label for="password">Password <span class="needed">*</span></label>
+                </div>
+            </div>
+            <div class="col">
+                <p>Select Role of user</p>
+                <!-- Is Admin field -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="admin" id="admin" name="role" {% if
+                        user.is_admin==True %} checked{% endif %}>
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="user" id="user" name="role" {% if
+                        user.is_admin==False %} checked{% endif %}>
+                    <label class="form-check-label" for="user"> User</label>
+                </div>
+            </div>
+            <div class="col">
+                <p>Select Gender of user</p>
+                <!-- Gender -->
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Male" id="male" name="gender" {% if
+                        user.gender=='Male' %} checked{% endif %}>
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="Female" id="female" name="gender" name="gender"
+                        {% if user.gender=='Female' %} checked{% endif %}>
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                </di>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% else %}
+<!------------------- If Not Admin --------------------------->
+<div>
+    <h1>Wooops!!!</h1>
+    <h3>Olny Admin Can See content of this Page</h3>
+    <img src="../static/images/not_allowed.svg" alt="Not Allowed" height="90%" width="90%">
+</div>
+{% endif %}

@@ -1,0 +1,176 @@
+{% if current_user.is_admin %}
+{% extends "base2.html" %}
+
+{% block title %} Update Contact {% endblock %}
+
+{% block left_title %}
+<h2>Contact Information</h2>
+{% endblock %}
+
+
+
+{% block img %}
+<img class="img-fluid" src="{{url_for('static', filename='images/details.svg')}}" id="left_icon">
+{% endblock %}
+
+
+{% block right_centent %}
+<h3>Update Contact Information</h3>
+{% endblock %}
+{% block button %}
+<!-- Button To Submit The Form  -->
+<button type="submit" class="btn btn-lg btn-outline-success my_shadow" form="contactForm">
+    Update
+</button>
+{% endblock %}
+
+{% block table %}
+<!-------------------------------- Form of Updation -------------------------------->
+<form id="contactForm" action="{{url_for('update_contact', id=contact.id)}}" method="post">
+    <!-- For twopdown menus -->
+    <div class="row mt-2">
+        <div class="col-lg-6">
+            <label for="subject">Select Subject of Feedback</label>
+            <select class="form-select form-select-lg mb-3" aria-label="large select example" style="font-size: 16px;"
+                id="subject" name="subject">
+                <optgroup label="Product/Service">
+                    <option value="Features" {% if contact.subject=='Features' %}selected{% endif %}>
+                        Features/Functionalities
+                    </option>
+                    <option value="Usability" {% if contact.subject=='Usability' %}selected{% endif %}>
+                        Usability/User Experience</option>
+                    <option value="Performance" {% if contact.subject=='Performance' %}selected{% endif %}>
+                        Performance/Reliability</option>
+                    <option value="Design" {% if contact.subject=='Design' %}selected{% endif %}>
+                        Design/Aesthetics</option>
+                </optgroup>
+                <optgroup label="Customer Support">
+                    <option value="Response Time" {% if contact.subject=='Customer Support' %}selected{% endif %}>
+                        Response Time</option>
+                    <option value="Communication Clearity" {% if contact.subject=='Communication Clearity' %}selected{%
+                        endif %}>
+                        Communication Clarity</option>
+                </optgroup>
+                <optgroup label="Website/App Experience:">
+                    <option value="Navigation" {% if contact.subject=='Navigation' %}selected{% endif %}>
+                        Navigation and Layout</option>
+                    <option value="Mobile Responsiveness" {% if contact.subject=='Mobile Responsiveness' %}selected{%
+                        endif %}>
+                        Mobile Responsiveness</option>
+                    <option value="Loading Speed" {% if contact.subject=='Loading Speed' %}selected{% endif %}>
+                        Loading Speed</option>
+                </optgroup>
+                <optgroup label="Content Quality">
+                    <option value="Accuracy and Credibility" {% if contact.subject=='Accuracy and Credibility'
+                        %}selected{% endif %}>
+                        Accuracy and Credibility</option>
+                    <option value="Readability/Clearity" {% if contact.subject=='Readability/Clearity' %}selected{%
+                        endif %}>
+                        Readability/Clearity</option>
+                </optgroup>
+                <option value="Other" {% if contact.subject=='Other' %}selected{% endif %}>
+                    Other</option>
+            </select>
+            <p class="text-danger" id="subject_error"></p>
+        </div>
+        <div class="col-lg-6">
+            <label for="type"> Select type of feedback</label>
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example" id="type" name="type"
+                style="font-size: 16px;">
+                <option value="Suggestion" {% if contact.type_of_feedback=='Suggestion' %}selected{% endif %}>
+                    Suggestion</option>
+                <option value="Bug Report" {% if contact.type_of_feedback=='Bug Report' %}selected{% endif %}>
+                    Bug Report</option>
+                <option value="Feature Request" {% if contact.type_of_feedback=='Feature Request' %}selected{% endif %}>
+                    Feature Request</option>
+                <option value="General Inquiry" {% if contact.type_of_feedback=='General Inquiry' %}selected{% endif %}>
+                    General Inquiry</option>
+                <option value="Usability Feedback" {% if contact.type_of_feedback=='Usability Feedback' %}selected{%
+                    endif %}>
+                    Usability Feedback</option>
+                <option value="Content Feedback" {% if contact.type_of_feedback=='Content Feedback' %}selected{% endif
+                    %}>
+                    Content Feedback</option>
+                <option value="Services Issue" {% if contact.type_of_feedback=='Services Issue' %}selected{% endif %}>
+                    Services Issue</option>
+            </select>
+            <p class="text-danger" id="type_error"></p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Full Name"
+                    value="{{contact.name}}">
+                <label for="name">Full Name <span style="color: red;">*</span></label>
+            </div>
+            <p class="text-danger" id="name_error"></p>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-floating mb-3 mt-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+                    value="{{contact.email}}">
+                <label for="email">Email<span style="color: red;">*</span></label>
+            </div>
+            <p class="text-danger" id="email_error"></p>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-floating mb-3 mt-3">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number"
+                    value="{{contact.phone}}">
+                <label for="phone">Phone</label>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" id="company" name="company"
+                    placeholder="Enter Your Company Name" value="{{contact.company}}">
+                <label for="company">Company</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3">
+            <label for="note" class="form-label">Note or Feedback Details <span style="color: red;">*</span></label>
+            <p class="text-danger" id="note_error"></p>
+            <textarea class="form-control" id="note" name="note" rows="4">{{contact.note}}</textarea>
+        </div </div>
+        <div class="row">
+            <h5>Required <span style="color: red;">*</span></h5>
+            <p>We process the personal data filled in above for the purpose of realization your in order to meet your
+                demand and prepare the offer. You can learn how we process your personal information
+                <a style="color: blue;" href="{{url_for('terms')}}">here</a>.
+            </p>
+        </div>
+</form>
+{% endblock %}
+
+
+{% else %}
+<!------------------- If Not Admin --------------------------->
+<div>
+    <h1>Wooops!!!</h1>
+    <h3>Olny Admin Can See content of this Page</h3>
+    <img src="../static/images/not_allowed.svg" alt="Not Allowed" height="90%" width="90%">
+</div>
+{% endif %}

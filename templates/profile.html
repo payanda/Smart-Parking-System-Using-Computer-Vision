@@ -1,0 +1,330 @@
+{% extends "base.html" %}
+{% block title %}Profile {% endblock %}
+{% block head %}
+
+<style>
+    #error_col {
+        padding-left: 48px;
+        padding-right: 48px;
+    }
+
+    .flex_button {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    @media (min-width: 280px) and (max-width: 820px) {
+        #error_col {
+            padding-left: 28px;
+            padding-right: 32px;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+{% block header %}
+{% endblock %}
+
+<div class="row p-1">
+    <div class="col-lg-12" id="error_col">
+        <!------------------ Show the Warning if profile details are not compelete ---------------------------->
+        {% if not user.about or not user.gender or not user.nationality or not user.date_of_birth or not
+        user.phone_number%}
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #FFD43B;"></i>
+                Warning!
+            </h4>
+            <p>
+                Your profile is incomplete, please click on the following fields to complete your profile:
+                <a href="">
+                    <span class="badge text-bg-warning rounded-pill">About</span>
+                </a>
+                <a href="">
+                    <span class="badge text-bg-warning rounded-pill">Details</span>
+                </a>
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!------------------ Cover Photo of profile page ---------------------------->
+<div class="container-fluid">
+    <!-- row cover photo-->
+    <div class="row px-4 mb-1">
+        <div class="card px-0">
+            {% if user.cover_photo %}
+            <img src="{{ url_for('uploaded_cover', filename=user.cover_photo) }}" alt="Cover Photo" height="250px"
+                style="background-size:ocver; object-fit: cover;">
+            {% else %}
+            <p>No Cover Photo uploaded yet.</p>
+            {% endif %}
+            <button data-bs-toggle="modal" data-bs-target="#update_cover_photo_modal" class="btn btn-secondary">
+                Update Cover photo
+            </button>
+            <div class="modal fade" id="update_cover_photo_modal" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="update_cover_photo_lable" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen-sm-down" style="width: fit-content; height: fit-content; ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="update_cover_photo_lable">Update Cover Photo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Upload form for Cover photo -->
+                            <form action="{{ url_for('uploads_cover') }}" method="post" enctype="multipart/form-data"
+                                id="upload_cover">
+                                <div>
+                                    <label for="cover_photo" class="form-label" style="cursor: pointer;">Change Cover
+                                        Photo</label>
+                                    <input class="form-control form-control-lg" name="cover_photo" id="cover_photo"
+                                        type="file">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Cancel</button>
+                            <button class="btn btn-success" type="submit" form="upload_cover">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of row cover photo-->
+
+
+
+
+
+    <!------------------ Profile Picture and Details ---------------------------->
+    <!-- row profile with details & about -->
+    <div class="row p-4 gap-2">
+        <!-- col profile -->
+        <div class="col-lg-4">
+            <div class="card my_shadow p-2 text-center" style="align-items: center;">
+                {% if user.profile_picture %}
+                <img src="{{ url_for('uploaded_profile', filename=user.profile_picture) }}" alt="Profile Picture"
+                    style="border-radius: 50%;" width="200" height="200">
+                {% else %}
+                <p>No profile picture uploaded yet.</p>
+                {% endif %}
+                <button data-bs-toggle="modal" data-bs-target="#update_profile_picture_modal"
+                    class="btn btn-light rounded-pill">
+                    Update Profile
+                </button>
+
+                <div class="modal fade" id="update_profile_picture_modal" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="update_profile_picture_label"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen-sm-down"
+                        style="width: fit-content; height: fit-content; ">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="update_profile_picture_label">Update Profile Picture</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Upload form for profile picture -->
+                                <form action="{{ url_for('uploads_profile') }}" method="post"
+                                    enctype="multipart/form-data" id="upload_picture">
+                                    <div>
+                                        <label for="profile_picture" class="form-label" style="cursor: pointer;">Change
+                                            Profile Picture</label>
+                                        <input class="form-control form-control-lg" name="profile_picture"
+                                            id="profile_picture" type="file">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Cancel</button>
+                                <button class="btn btn-success" type="submit" form="upload_picture">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title text-center">{{user.name}}</h4>
+                    <h6 class="card-text text-primary text-center">{{user.email}}</h6>
+                    <button data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal"
+                        class="btn btn-danger btn-lg rounded-5 mt-2" style="width: 16rem;">
+                        Delete Account
+                    </button>
+                    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1"
+                        aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-fullscreen-sm-down"
+                            style="width: fit-content; height: fit-content; ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Account
+                                        Deletion</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="alert alert-danger">
+                                        Are you sure you want to delete your account? This action is permanent.
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <form action="{{ url_for('delete_user_profile') }}" method="POST">
+                                        <button type="submit" class="btn btn-danger">Delete Account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col profile -->
+
+
+        <!-- col details & about-->
+        <div class="col-lg-7">
+            <!-- row details -->
+            <div class="row">
+                <div class="col p-2">
+                    <div class="flex_button">
+                        <h4>Details</h4>
+                        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#details_box">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="details_box">
+                    <div class="modal-dialog modal-fullscreen-sm-down"
+                        style="width: fit-content; height: fit-content; ">
+                        <div class="container bg-white p-3 my_shadow rounded-3">
+                            <!-- modal header -->
+                            <div class="row bg-light">
+                                <div class="flex_button">
+                                    <h4>Details</h4>
+                                    <button type="button" class="btn" data-bs-dismiss="modal">
+                                        <i class="fa-solid fa-xmark fa-xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- end of modal header -->
+
+                            <!-- modal body -->
+                            <div class="row m-3">
+                                <div class="col-lg-12">
+                                    <form action="{{ url_for('profile_details')}}" method="post" id="details_form">
+                                        <div class="row mb-2">
+                                            <label for="gender">Gender</label>
+                                            <select class="form-select form-select-lg mb-3" name="gender" id="gender">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <label for="data_of_birth">Date Of Birth</label>
+                                            <input class="form-control form-control-lg mb-3" type="date" name="date"
+                                                id="date" value="{{user.date_of_birth}}" onclick="setCurrentDate()">
+                                        </div>
+
+                                        <div class="row">
+                                            <label for="nationality">Nationality</label>
+                                            <select class="form-select form-select-lg" name="nationality"
+                                                id="nationality">
+                                                <option value="Afghan">Afghan</option>
+                                                <option value="Iranian">Iranian</option>
+                                                <option value="Pakistani">Pakistani</option>
+                                                <option value="Indian">Indian</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <label for="mobile">Mobile Number</label>
+                                            <input class="form-control form-control-lg mb-3" type="text" name="mobile"
+                                                id="mobile" value="{{user.phone_number}}">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- modal body -->
+
+                            <div class="row m-3 gap-3">
+                                <button class="btn  btn-lg btn-primary" type="submit" form="details_form"> Save
+                                </button>
+                                <button type="button" class="btn btn-lg btn-danger" data-bs-dismiss="modal">
+                                    Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Gender</th>
+                                <td>{{ user.gender }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date of birth</th>
+                                <td>{{ user.date_of_birth }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nationality</th>
+                                <td>{{ user.nationality }}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>{{ user.phone_number }}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+            <!--end row details -->
+
+            <!-- row about -->
+            <div class="row mt-3">
+                <div class="col p-2">
+                    <div class="flex_button">
+                        <h4>About</h4>
+                        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#about_box">
+                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                        </button>
+                    </div>
+                    <p>{{user.about}}</p>
+                    <div class="collapse rounded-2 p-2" id="about_box">
+                        <form action="{{ url_for('profile_about') }}" method="post">
+                            <textarea class="form-control" id="about" name="about" rows="5">{{user.about}}</textarea>
+                            <button class="btn btn-md btn-primary rounded-pill mt-2" type="submit">Save</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- end row about -->
+        </div>
+        <!-- col details & about-->
+    </div>
+    <!-- row profile with details & about -->
+</div>
+<!-- end of container fluid -->
+
+{% endblock %}

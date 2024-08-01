@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} 404 Not Found {% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+{% block header %}
+{% endblock %}
+<div class="container-fluid mt-5">
+    <div class="row p-5 my_shadow" style="height: fit-content;">
+        <div class="col-lg-12">
+            <img src="{{url_for('static', filename='images/404.svg')}}" alt="Page Note Found" width="100%" height="500px">
+        </div>
+    </div>
+</div>
+{% endblock %}

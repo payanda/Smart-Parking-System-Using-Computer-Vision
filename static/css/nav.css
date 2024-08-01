@@ -1,0 +1,72 @@
+.nav li button {
+    color: rgb(253, 124, 64);
+    text-decoration: none;
+    transition: background-color 0.5s ease-in-out;
+}
+.nav li button:hover {
+    background-color: var(--bs-white);
+    color: var(--bs-primary);
+    border: 1px solid sandybrown;
+    box-shadow: rgba(85, 85, 85, 0.5) 0px 10px 20px, 
+    rgba(85, 85, 85, 0.5) 0px 6px 6px;
+}
+.nav li button:active {
+    background-color: var(--bs-white);
+}
+
+a, #nav_dropdown_color {
+    color: indigo;
+    /*color:rgb(178, 76, 28);*/
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navigation {
+    background-image: url("../images/navbar.svg");
+    background-color: antiquewhite;
+    /*background-color: #2e0c57;*/
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.offcanvas {
+    background-image: url("../images/navbar.svg");
+    background-color: antiquewhite;
+    /*background-color: #2e0c57;*/
+}
+.offcanvas-body{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+}
+
+.nav_shadow {
+    box-shadow: rgba(83, 83, 83, 0.744) 0px 5px 15px;
+}
+
+/* SET THE SIZE OF OFFCANVAS USING CSS VARIABLES BY CLASSNAME
+    
+    .offcanvas-size-xxl {--bs-offcanvas-width: min(95vw, 90vw) !important;}
+    */
+.offcanvas-size-xl {
+    --bs-offcanvas-width: min(80vw, 500px) !important;
+}
+
+@media (max-width: 768px) {
+    .offcanvas-size-xl {
+        --bs-offcanvas-width: 100vw !important;
+    }
+}
+/* Tablet screens (768px to 991px) */
+@media (max-width: 991px) {
+    .offcanvas-body {
+        display:block
+    }
+    .offcanvas-body ul{
+        margin-bottom: 30px;
+    }
+}

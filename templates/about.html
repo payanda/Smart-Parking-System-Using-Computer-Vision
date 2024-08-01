@@ -1,0 +1,449 @@
+{% extends "base.html" %}
+{% block title %} About US {% endblock %}
+{% block head %}
+<style>
+    #team_card {
+        width: 85%;
+        margin: 0 auto;
+        background-image: url("../static/images/svg.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+
+    }
+
+    #revolution {
+        width: 45%;
+    }
+
+
+    img {
+        margin-top: 0;
+        transition: transform 0.3s ease;
+    }
+
+    img:hover {
+        cursor: pointer;
+        transform: scale(0.99);
+        box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+    }
+
+    @media (max-width: 768px) {
+
+        #team_card,
+        #revolution {
+            width: 95%;
+        }
+
+        img {
+            margin-top: 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% block header %}
+<!---------------------- HEADER OF PAGE ---------------------->
+<div class="row ex-header">
+    <div class="col-lg-12 text-center px-5">
+        <h1 class="mb-4">SMART PARKING SYTEM USING COMPUTER VISION</h1>
+        <h6 class=" mb-4">Experience the Future of Booking with Computer Vision and Machine Learning and Modern
+            reservation system for all types of offices and drivers with continuous support from specialists</h6>
+        {% if not current_user.is_authenticated %}
+        <a class="btn-outline-lg page-scroll" href="{{ url_for('signup') }}">Sign up for free</a>
+        {% else %}
+        <a class="btn-outline-lg page-scroll" href="{{ url_for('book') }}">Book a Slot Now</a>
+        {% endif %}
+    </div>
+    <!-- end of col -->
+</div>
+<!-- end of row -->
+{% endblock %}
+
+<!---------------------- MEET OUR TEAM BOX ---------------------->
+<div class="container-fluid p-4">
+    <dov class="row">
+        <div class="p-4 rounded-4 my_shadow " id="team_card">
+            <h1 class="mb-4">Meet Our Team</h1>
+            <h6>Meet the brains behind the magic! Our team of three tech wizards is revolutionizing the way you book
+                slots. From coding to coffee runs, we do it all with a sprinkle of innovation and a dash of caffeine.
+            </h6>
+            <h6>Get to know our team members: <b>Noorallah Payanda</b>, the coding maestro; <b>Ramazzan Hussaini</b>,
+                the design diva; and <b>Abedin Nabawi</b>, the machine learning maverick. Together, we're unstoppable in
+                creating the smartest booking system you've ever seen!</h6>
+            <h6>With a blend of expertise, creativity, and a touch of quirkiness, we're here to make your booking
+                experienceseamless and fun. Say hello to the faces behind the future of slot booking!</h6>
+            <h6 class="mt-4">Our team of specialists is here for you. It does not end with slots ordering, we will go
+                with you all the way to
+                effective office management. We are here to help the adaptation of the booking system to your needs. We
+                provide ongoing
+                technical support and we are constantly adding new features that are available to all new and existing
+                customers.</>
+        </div>
+    </dov>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!---------------------- OUR TEAM BOX AND PHOTO ---------------------->
+<div class="container-fluid p-4">
+    <div class="row mt-5">
+        <div class="col-lg-6 p-4 rounded-4 my_shadow">
+            <h1>Our Team</h1>
+            <p>Discover the faces behind the our product. Our team of experts is ready to help you with anything you
+                need. Our goal is to make it easier for small and large companies to manage their offices and make the
+                operation of entire companies more efficient. Our solution is backed by the stable roboflow and
+                ultralytics companies , whose vision is that Machine learning and computer vision are everywhere today.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <img class="rounded-4 img-fluid mx-auto d-block scale"
+                src="{{url_for('static', filename='images/noorallah.jpg')}}" alt="first right side image" width="600"
+                height="500">
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-lg-4 p-4 rounded-4 my_shadow">
+            <h1>Team Gallary</h1>
+            <h6>Peek into our world! Check out the photos of <b>Noorallah Payanda</b>, <b>Ramazan Hussaini</b>, and
+                <b>Abedin Nabawi </b> as they work their magic behind the scenes. Get a glimpse of the team dynamics and
+                see the genius at play.</h6>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="rounded-4 img-fluid mx-auto d-block"
+                        src="{{url_for('static', filename='images/Noor and abed.jpg')}}" alt="first right side image"
+                        width="600" height="600">
+                </div>
+                <div class="col-md-6" id="margin_top">
+                    <img class="rounded-4 img-fluid mx-auto d-block"
+                        src="{{url_for('static', filename='images/Noor and abed 2.jpg')}}" alt="first right side image"
+                        width="600" height="600">
+                </div>
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <img class="rounded-4 img-fluid mx-auto d-block"
+                        src="{{url_for('static', filename='images/Noor and ramzan.jpg')}}" alt="first right side image"
+                        width="600" height="600">
+                </div>
+                <div class="col-md-6" id="margin_top">
+                    <img class="rounded-4 img-fluid mx-auto d-block"
+                        src="{{url_for('static', filename='images/demo1.jpg')}}" alt="first right side image"
+                        width="600" height="600">
+                </div>
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <img class="rounded-4 img-fluid mx-auto d-block"
+                        src="{{url_for('static', filename='images/demo1.jpg')}}" alt="first right side image"
+                        width="600" height="600">
+                </div>
+                <div class="col-md-6" id="margin_top">
+                    <img class="rounded-4 img-fluid mx-auto d-block"
+                        src="{{url_for('static', filename='images/demo1.jpg')}}" alt="first right side image"
+                        width="600" height="600">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-5 my_shadow rounded-4">
+        <div class="col-lg-4 p-3">
+            <img class="rounded-4 img-fluid mx-auto d-block"
+                src="{{url_for('static', filename='images/smart_account.jpg')}}" alt="first right side image"
+                width="350" height="400">
+            <h1 class="text-center">Smart Account</h1>
+            <p class="text-center">Create your account effortlessly and dive into the smart world.</p>
+        </div>
+        <div class="col-lg-4 p-3">
+            <img class="rounded-4 img-fluid mx-auto d-block"
+                src="{{url_for('static', filename='images/instant_booking.jpg')}}" alt="first right side image"
+                width="350" height="400">
+            <h1 class="text-center">Instant Booking</h1>
+            <p class="text-center">Book slots in a blink of an eye with our system.</p>
+        </div>
+        <div class="col-lg-4 p-3">
+            <img class="rounded-4 img-fluid mx-auto d-block"
+                src="{{url_for('static', filename='images/live_availability.jpeg')}}" alt="first right side image"
+                width="350" height="400">
+            <h1 class="text-center">Live Availability</h1>
+            <p class="text-center">View real-time empty slots directly on our main page.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!---------------------- Revolutionizing box with a photo ---------------------->
+<div class="container-fluid p-4">
+    <div class="row">
+        <div class="col-lg-6 p-4 rounded-4 my_shadow" id="revolution">
+            <h1 style="overflow-wrap: break-word;">Revolutionizing Booking Systems</h1>
+            <p>Join the future with our cutting-edge smart System powered by computer vision and machine learning. Say
+                goodbye to traditional booking hassles and hello to seamless, efficient scheduling.</p>
+            <p>Create your account in seconds, effortlessly book your preferred slot, and witness the magic of real-time
+                availability displayed on our dynamic main page. Experience convenience like never before!</p>
+        </div>
+
+        <div class="col-lg-6">
+            <img class="rounded-4 img-fluid mx-auto d-block"
+                src="{{url_for('static', filename='images/revolution.jpg')}}" alt="Revolutionizing photo" width="500"
+                height="400">
+        </div>
+    </div>
+    <div class="p-4 rounded-4">
+    </div>
+</div>
+
+
+
+
+
+
+<!---------------------- SERVICES BOX ---------------------->
+<div class="container-fluid p-4">
+    <div class="row rounded-4 my_shadow" id="team_card">
+        <div class="col-lg-4 p-4 text-center">
+            <i class="fa-solid fa-3 fa-2xl" style="color: #5e9c6d;"></i>
+            <h6 class="pt-2">Visionaries at Work</>
+        </div>
+        <div class="col-lg-4 p-4 text-center">
+            <i class="fa-solid fa-1 fa-2xl" style="color: #5e9c6d;"></i>
+            <h6 class="pt-2">Revolutionary System</h6>
+        </div>
+        <div class="col-lg-4 p-4 text-center">
+            <i class="fa-solid fa-2 fa-2xl" style="color: #5e9c6d;">4/7</i>
+            <h6 class="pt-2">Real-Time Availability</h6>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!---------------------- BOX OF EACH PERSON PHOTOS ---------------------->
+<div class="container-fluid p-4">
+    <div class="row p-4 rounded-4 my_shadow text-center" id="team_card">
+        <h6 class="pb-3">Incredible innovation! Booking has never been easier. Kudos to the team for their genius.</h6>
+        <div class="col-md-4">
+            <div>
+                <img style="border-radius: 50%;" src="{{url_for('static', filename='images/noorallah.jpg')}}"
+                    alt="Noorallah Photo" width="200" height="200">
+            </div>
+            <h5 class="pt-3">Noorallah Payanda</h5>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <img style="border-radius: 50%;" src="{{url_for('static', filename='images/abedin.jpg')}}"
+                    alt="Noorallah Photo" width="200" height="200">
+            </div>
+            <h5 class="pt-3">Abedin Nabawi</h5>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <img style="border-radius: 50%;" src="{{url_for('static', filename='images/ramazan.jpg')}}"
+                    alt="Noorallah Photo" width="200" height="200">
+            </div>
+            <h5 class="pt-3">Ramazan Hussaini</h5>
+        </div>
+    </div>
+
+
+    <div class="row pt-5">
+        <!-- Questions -->
+        <div class="accordion-1 my_shadow rounded-4">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="h2-heading">Frequent Asked Questions?.</h2>
+                    </div>
+                </div>
+                <!-- end of row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="accordion" id="accordionExample">
+
+                            <!-- Accordion Item -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        What inspired the creation of the Smart Parking System?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        The inspiration behind our Smart Parking System stemmed from a desire to tackle
+                                        the common urban challenge of
+                                        parking congestion. We recognized the need for a more efficient and convenient
+                                        solution to help individuals navigate
+                                        crowded parking lots and streamline the parking process.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of accordion-item -->
+
+                            <!-- Accordion Item -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        How does the Smart Parking System work?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Our Smart Parking System utilizes cutting-edge technology, including computer
+                                        vision and machine learning
+                                        algorithms, to monitor and manage parking spaces in real-time. By analyzing
+                                        parking availability and occupancy, our
+                                        system provides users with up-to-date information on nearby parking spots,
+                                        enabling them to locate and reserve spaces
+                                        with ease.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of accordion-item -->
+
+
+                            <!-- Accordion Item -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        What sets the Smart Parking System apart from traditional parking solutions?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Unlike traditional parking solutions, our Smart Parking System offers several
+                                        key advantages. Firstly, it
+                                        provides real-time updates on parking availability, eliminating the need for
+                                        time-consuming searches. Additionally, our
+                                        system offers convenient reservation options through a user-friendly mobile
+                                        application, enhancing the overall parking
+                                        experience for users.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of accordion-item -->
+
+                            <!-- Accordion Item -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                        Is the Smart Parking System accessible on mobile devices?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Yes, our Smart Parking System is fully accessible on mobile devices, including
+                                        smartphones and tablets. Our responsive
+                                        mobile application allows users to access parking information, reserve spots,
+                                        and manage their accounts on the go,
+                                        providing unparalleled convenience and flexibility.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of accordion-item -->
+
+                            <!-- Accordion Item -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFive" aria-expanded="false"
+                                        aria-controls="collapseFive">
+                                        What benefits can users expect from using the Smart Parking System?
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p class="mb-4">
+                                            By utilizing our Smart Parking System, users can expect a range of benefits,
+                                            including:
+                                        </p>
+                                        <ul class="list-unstyled li-space-lg mb-4">
+                                            <li class="d-flex">
+                                                <i class="fa-solid fa-square fa-2xs"></i>
+                                                <div class="flex-grow-1">
+                                                    <strong>Time savings:</strong> Users can locate parking spots
+                                                    quickly and efficiently, reducing the time spent searching for
+                                                    parking.
+                                                </div>
+                                            </li>
+                                            <li class="d-flex">
+                                                <i class="fa-solid fa-square fa-2xs"></i>
+                                                <div class="flex-grow-1"><strong>Convenience:</strong> Our mobile
+                                                    application allows for easy reservation and management of parking
+                                                    spaces, enhancing the overall
+                                                    parking experience.
+                                                </div>
+                                            </li>
+                                            <li class="d-flex">
+                                                <i class="fa-solid fa-square fa-2xs"></i>
+                                                <div class="flex-grow-1"><strong>Reduced congestion:</strong> By
+                                                    providing real-time parking availability information, our system
+                                                    helps alleviate congestion in
+                                                    parking lots, leading to smoother traffic flow and improved
+                                                    efficiency.
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- end of accordion-item -->
+
+                        </div>
+                        <!-- end of accordion -->
+                    </div>
+                    <!-- end of col -->
+                </div>
+                <!-- end of row -->
+            </div>
+            <!-- end of container -->
+        </div>
+        <!-- end of accordion-1 -->
+        <!-- end of questions -->
+
+    </div>
+</div>
+
+{% endblock %}

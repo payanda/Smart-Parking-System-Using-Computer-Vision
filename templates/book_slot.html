@@ -1,0 +1,153 @@
+{% extends "base2.html" %}
+{% block title %}Book Slot {% endblock %}
+{% block left_title %}
+<h2>Slot Booking</h2>
+{% endblock %}
+{% block img %}
+<img class="img-fluid" src="{{url_for('static', filename='images/slot_booking.svg')}}" id="left_icon">
+{% endblock %}
+
+{% block right_centent %}
+<h4>Please Fill out this form for forther processing or booking a slot.</h4>
+{% endblock %}
+
+{% block button %}
+<p> <strong class="needed">Note: </strong>The field that has an asterisk is needed.</p>
+{% endblock %}
+{% block form %}
+
+<form id="bookingForm" name="bookingForm" action="{{url_for('book')}}" onsubmit="return validate(event)" method="post"
+    class="p-5">
+    <div class="row">
+        <div class="col">
+            <!-- License Number Plate  -->
+            <div class="mb-4 form-floating">
+                <input type="text" class="form-control" id="plate" name="plate" placeholder="Number Plate">
+                <label for="plate">Number Plate <span class="needed">*</span></label>
+                <p class="text-danger mt-1 rounded-bottom-2 " id="plate_error"></p>
+            </div>
+        </div>
+        <div class="col">
+            <!-- vihicle type  -->
+            <div class="mb-4 form-floating">
+                <select class="form-select form-select-md form-control" aria-label="small select example"
+                    id="vihicle_type" name="vihicle_type">
+                    <option value="Car">Car</option>
+                    <option value="Motorcycle">Motorcycle</option>
+                    <option value="Truck">Truck</option>
+                </select>
+                <label for="vihicle_type">Type of Vihicle</label>
+                <p class="text-danger" id="vihicle_type_error"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="row">
+        <div class="col">
+            <!-- Arival Date  -->
+            <div class="mb-4 form-floating">
+                <input type="date" class="form-control" id="arival_date" name="arival_date" placeholder="Arival Date"
+                    onclick="setCurrentDate()">
+                <label for="arival_date">Ariival Date <span class="needed">*</span></label>
+                <p class="text-danger" id="arival_date_error"></p>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Arival Time  -->
+            <div class="mb-4 form-floating">
+                <input type="time" class="form-control" id="arival_time" name="arival_time" placeholder="Arival Time">
+                <label for="arival_time">Ariival Time <span class="needed">*</span></label>
+                <p class="text-danger" id="arival_time_error"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col">
+            <!-- Arival Date  -->
+            <div class="mb-4 form-floating">
+                <input type="date" class="form-control" id="departure_date" name="departure_date"
+                    placeholder="Departure Date" onclick="setCurrentDate()">
+                <label for="departure_date">Departure Date <span class="needed">*</span></label>
+                <p class="text-danger" id="departure_date_error"></p>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Arival Time  -->
+            <div class="mb-4 form-floating">
+                <input type="time" class="form-control" id="departure_time" name="departure_time"
+                    placeholder="Arival Time">
+                <label for="departure_time">Departure Time <span class="needed">*</span></label>
+                <p class="text-danger" id="departure_time_error"></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Time Duration   -->
+            <div class="mb-4 form-floating">
+                <input type="number" class="form-control" id="duration" name="duration" placeholder="Time Duration">
+                <label for="plate">Time Duration <span class="needed">*</span></label>
+                <p class="text-danger mt-1 rounded-bottom-2 " id="duration_error"></p>
+            </div>
+
+        </div>
+        <div class="col">
+            <!-- Number of Slot-->
+            <div class="mb-4 form-floating">
+                <select class="form-select form-select-md form-control" aria-label="small select example"
+                    id="slot_number" name="slot_number">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label for="slot_number">Select Your Slot Number</label>
+                <p class="text-danger" id="slot_number_error"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1 ">
+        <div class="col">
+            <!-- Checkbox Button -->
+            <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="check" name="check">
+
+                <label class="form-check-label" for="check"> <span class="needed">*</span> I agree with the site's
+                    stated
+                    <a href="{{ url_for('services')}}">Privacy Policy</a> and <a href="{{url_for('terms')}}">Terms &
+                        Conditions</a></label>
+            </div>
+            <p class="text-danger" id="check_error"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <!-- Submit Button  -->
+            <button type="submit" class="form-control-submit-button" form="bookingForm" id="submitButton">Book
+                Slot</button>
+        </div>
+        <div class="col">
+            <!-- Reset Button  -->
+            <button type="reset" class="form-control-reset-button" form="bookingForm">Cancel</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

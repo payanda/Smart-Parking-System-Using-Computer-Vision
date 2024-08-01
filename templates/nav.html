@@ -1,0 +1,230 @@
+<div class="container-fluid" style="height: 90px; background-image: url('../static/images/navbar.svg');">
+    <nav class="navbar navbar-expand-lg pt-2 pb-3 fixed-top navigation" data-bs-theme="light">
+        <div class="container-fluid">
+            <!-- Image Logo -->
+            <a class="navbar-brand logo-image" href="{{ url_for('index') }}" title="Go to Home Page!">
+                <span style="color: #ff5900;">
+                    <i class="fa-solid fa-s fa-xl"></i>
+                    <i class="fa-solid fa-square-parking fa-xl"></i>
+                    <i class="fa-solid fa-s fa-xl"></i>
+                </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- OffCanvas -->
+            <div class="offcanvas offcanvas-end offcanvas-size-xl" data-bs-scroll="true" tabindex="-1"
+                id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+
+                <!-- OffCanvas Header -->
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">
+                        <a class="navbar-brand logo-image" href="{{ url_for('index') }}" style="color: #ed5f12;">
+                            <span style="color: #ff5900;">
+                                <i class="fa-solid fa-s fa-xl"></i>
+                                <i class="fa-solid fa-square-parking fa-xl"></i>
+                                <i class="fa-solid fa-s fa-xl"></i>
+                            </span>
+                        </a>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <!-- OffCanvas Body -->
+                <div class="offcanvas-body">
+                    <!-- OffCanvas Left Memu-->
+                    <ul class="nav nav-pills nav-fill gap-2 p-3 small rounded-3 nav_shadow" id="nav_list" role="tablist"
+                        style="--bs-nav-pills-link-active-bg: var(--bs-white);">
+
+                        <!-- Only for Admins -->
+
+                        <!-- OffCanvas Left Memu Items-->
+                        {% if current_user.is_authenticated or not current_user.is_authenticated %}
+                        {% if current_user.is_authenticated and current_user.is_admin %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 " data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="true">
+                                <a href="{{url_for('index')}}">HOME</a>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="true">
+                                <a href="{{url_for('parking_cost')}}">PARKING COST</a>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="true">
+                                <a href="{{url_for('user_details')}}">USER DETAILS</a>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="false"><a href="{{url_for('view_booking')}}">BOOKING DETAILS</a></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="false"><a href="{{url_for('contact_details')}}">CONTACT DETAILS
+                                </a></button>
+                        </li>
+
+
+                        <!-- Only for Users -->
+                        {% else %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 " data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="true">
+                                <a href="{{url_for('index')}}">HOME</a>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="true">
+                                <a href="{{url_for('demo')}}">DEMO VERSION</a>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="false"><a href="{{url_for('book')}}">BOOK SLOT</a></button>
+                        </li>
+
+
+
+
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="true">
+                                <a href="{{url_for('contact')}}">CONTACT US</a>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3" data-bs-toggle="tab" type="button" role="tab"
+                                aria-selected="false"><a href="{{url_for('about')}}">ABOUT US</a></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <div class="dropdown">
+                                <button class="nav-link rounded-3 dropdown-toggle p-2" type="button" role="tab"
+                                    data-bs-toggle="dropdown" aria-expanded="false" id="nav_dropdown_color">
+                                    <span id="nav_dropdown_color">SERVICES</span>
+                                </button>
+                                <ul class="dropdown-menu nav_shadow p-2">
+                                    <li class=""><button class="rounded-3 dropdown-item" type="button">
+                                            <a href="{{url_for('services')}}">SERVICES</a></button>
+                                    </li>
+                                    <li><button class="rounded-3 dropdown-item" type="button">
+                                            <a href="{{url_for('detail')}}">DETAILS</a></button>
+                                    </li>
+                                    <li><button class=" rounded-3 dropdown-item" type="button">
+                                            <a href="{{url_for('terms')}}">TERMS & CONDITIONS</a></button>
+                                    </li>
+
+                                    <li><button class=" rounded-3 dropdown-item" type="button">
+                                            <a href="{{url_for('parking_cost')}}">PARKING COST</a></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        {% endif %}
+                        {% endif %}
+                    </ul>
+
+                    <!-- OffCanvas Right Memu-->
+                    <ul class="nav nav-pills nav-fill gap-2 p-3 small rounded-3 nav_shadow" id="pillNav3" role="tablist"
+                        style="--bs-nav-link-color: var(--bs-black);
+                                                    --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+                        <!-- OffCanvas Left Memu Items -->
+
+                        {% if not current_user.is_authenticated %}
+                        <!-- Sign Up -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-success" data-bs-toggle="tab" type="button" role="tab"
+                                title="Sign Up to website" aria-selected="false">
+                                <a href="{{url_for('signup')}}">
+                                    <i class="fa-solid fa-user-plus fa-xl"></i>
+                                    SIGN UP
+                                </a>
+
+                            </button>
+                        </li>
+
+                        <!-- Sign In -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-outline-success" data-bs-toggle="tab" type="button"
+                                role="tab" title="Login to website " aria-selected="false">
+                                <a href="{{url_for('login')}}">
+                                    <i class="fa-solid fa-right-to-bracket fa-xl"></i>
+                                    LOG IN
+                                </a>
+                            </button>
+                        </li>
+                        {% else %}
+                        {% if not current_user.is_admin %}
+                        <!-- Sign Out -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-outline-success" data-bs-toggle="tab" type="button"
+                                role="tab" title="Logout from website" aria-selected="false">
+                                <a href="{{url_for('logout')}}">
+                                    <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+                                    LOGOUT
+                                </a>
+                            </button>
+                        </li>
+                        <!-- Profile -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-outline-success" data-bs-toggle="tab" type="button"
+                                role="tab" title="User Profile " aria-selected="false">
+                                <a href="{{url_for('profile')}}">
+                                    <i class="fa-solid fa-user fa-xl"></i>
+                                    PROFILE
+                                </a>
+                            </button>
+                        </li>
+                        {% else %}
+                        <!-- Dashboard -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-outline-success" data-bs-toggle="tab" type="button"
+                                role="tab" title="Admin Dashboard " aria-selected="false">
+                                <a href="{{url_for('dashboard')}}">
+                                    <i class="fa-solid fa-chart-simple fa-flip-horizontal fa-xl"></i>
+                                    DASHBORAD
+                                </a>
+                            </button>
+                        </li>
+                        <!-- Profile -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-outline-success" data-bs-toggle="tab" type="button"
+                                role="tab" title="User Profile " aria-selected="false">
+                                <a href="{{url_for('profile')}}">
+                                    <i class="fa-solid fa-user fa-xl"></i>
+                                    PROFILE
+                                </a>
+                            </button>
+                        </li>
+                        <!-- Sign Out -->
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-3 btn-outline-success" data-bs-toggle="tab" type="button"
+                                role="tab" title="Logout from website" aria-selected="false">
+                                <a href="{{url_for('logout')}}">
+                                    <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+                                    LOGOUT
+                                </a>
+                            </button>
+                        </li>
+                        {% endif %}
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </div>
+            <!-- end of offcanvas -->
+        </div>
+        <!-- end of container -->
+    </nav>
+    <!-- end of nav -->
+</div>

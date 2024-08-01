@@ -1,0 +1,86 @@
+{% extends "base2.html" %}
+{% block title %}Parking Cost{% endblock %}
+{% block left_title %}
+<h2>Parking Cost</h2>
+{% endblock %}
+
+
+{% block img %}
+<img class="img-fluid" src="{{url_for('static', filename='images/parking_cost.svg')}}" id="left_icon">
+{% endblock %}
+
+
+{% block form %}
+<center>
+    <h3>This is the price you pay for each Slot per hour. </h3>
+    {% if current_user.is_admin %}
+    <!-- Basic -->
+    <div class="ex-form-1 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3">
+                    <div class="text-box mt-5 mb-5">
+                        <!-- Parking Cost -->
+                        <form id="costForm" action="{{url_for('parking_cost')}}" method="post">
+                            <!-- Cost -->
+                            <div class="mb-4 form-floating">
+                                <input type="number" class="form-control" id="cost" name="cost" placeholder="20"
+                                    min="10" max="100" value={{cost_value}}>
+                                <label for="cost">Cost per hour</label>
+                                <p class="text-danger" id="cosst_error"></p>
+                            </div>
+                            <!-- Submit Button  -->
+                            <button type="submit" class="form-control-submit-button">Save</button>
+                            <!-- Reset Button  -->
+                            <button type="button" class="form-control-reset-button mt-3" id="back">Cancel</button>
+                            <script>
+                                document.getElementById('back').addEventListener('click', goBack);
+
+                                function goBack() {
+                                    // Navigate back one step in the browser history
+                                    window.history.back();
+                                }
+                            </script>
+
+                        </form>
+                        <!-- end of sign up form -->
+                    </div>
+                    <!-- end of text-box -->
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of ex-basic-1 -->
+    <!-- end of basic -->
+    {% else %}
+    <!-- Basic -->
+    <div class="ex-form-1 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3">
+                    <div class="text-box mt-5 mb-5">
+                        <!-- Cost -->
+                        <div class="mb-4 form-floating">
+                            <input type="number" class="form-control" id="cost" name="cost" placeholder="20" min="10"
+                                max="100" value="20" disabled>
+                            <label for="cost">Cost per hour</label>
+                            <p class="text-danger" id="cosst_error"></p>
+                        </div>
+                    </div>
+                    <!-- end of text-box -->
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of ex-basic-1 -->
+    <!-- end of basic -->
+    {% endif %}
+
+</center>
+{% endblock %}

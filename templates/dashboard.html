@@ -1,0 +1,181 @@
+{% if current_user.is_admin %}
+{% extends "base2.html" %}
+{% block left_title %}
+<h2 class="text-break  ">Welcom to Dashboard</h2>
+{% endblock %}
+{% block right_centent %}
+<h2>Engagement Status</h2>
+{% endblock %}
+{% block button %}
+<div class="btn-group gap-2 ">
+    <button class="btn btn-lg btn-outline-success" onclick="startStream()">Start Streaming</button>
+    <button class="btn btn-lg btn-outline-danger" onclick="stopStream()">Stop Streaming</button>
+</div>
+{% endblock %}
+{% block table %}
+<div class="row">
+    <div class="col-xs-10 col-sm-6 col-md-6 p-2 ">
+        <div class="card card-style mb-2">
+            <div class="card-body">
+                <div class="chart-container" style="position: relative;">
+                    <canvas id="user_chart" style="max-height: 250px; height: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-10 col-sm-6 col-md-6 p-2 ">
+        <div class="card card-style mb-2">
+            <div class="card-body">
+                <div class="chart-container" style="position: relative;">
+                    <canvas id="gender_chart" style="max-height: 250px; height: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let engament_values = JSON.parse({{ chart_values_users | tojson}});
+    var ctx = document.getElementById('user_chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Users", "Contacts", "Bookings"],
+            datasets: [{
+                label: "Engagements",
+                data: engament_values,
+
+                backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                    '#B276B2', '#E16851', '#FB8267'],
+                borderWidth: 1,
+                hoverBorderColor: "black",
+                hoverBorderWidth: 2,
+                hoverBackgroundColor: 'rgba(154, 245, 140)',
+                pointHoverRadius: 5
+            }],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top",
+                    labels: {
+                        color: "black"
+
+                    },
+                },
+                title: {
+                    display: true,
+                    text: "Web Application Engagements",
+                    fontSize: 50,
+                },
+                elements: {
+                    hitRadius: 3,
+                },
+                scale: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    });
+    let gender_values = JSON.parse({{ chart_values_male_female | tojson}});
+    var gender = document.getElementById('gender_chart').getContext('2d');
+    var chart = new Chart(gender, {
+        type: 'pie',
+        data: {
+            labels: ["Male", "Female"],
+            datasets: [{
+                label: 'Male VS Female',
+                data: gender_values,
+                backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68',
+                    '#B276B2', '#E16851', '#FB8267'],
+
+                borderWidth: 1,
+                hoverBorderColor: "black",
+                hoverBorderWidth: 2,
+                hoverBackgroundColor: 'rgba(154, 245, 140)',
+                pointHoverRadius: 5
+            }],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "right",
+                    labels: {
+                        color: "black"
+                    },
+                },
+                title: {
+                    display: true,
+                    text: "Males VS Females",
+                    fontSize: 50,
+                    padding: 10
+                },
+                elements: {
+                    hitRadius: 3,
+                },
+                scale: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    });
+</script>
+<div class="row">
+    <div class="col-xs-10 col-sm-6 col-md-6 p-2 ">
+        <div class="card card-style mb-2">
+            <div class="card-body">
+                <div class="chart-container" style="position: relative;">
+                    <h6>Live Streaming</h6>
+                    <hr>
+                    <img id="liveVideo" src="" width="100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-10 col-sm-6 col-md-6 p-2 ">
+        <div class="card card-style mb-2">
+            <div class="card-body">
+                <div class="chart-container" style="position: relative;">
+                    <h6>YOLO Result</h6>
+                    <hr>
+                    <img id="yoloVideo" src="" width="100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function startStream() {
+        fetch('/start_stream').then(response => {
+            if (response.ok) {
+                document.getElementById('liveVideo').src = "{{ url_for('video_live') }}";
+                document.getElementById('yoloVideo').src = "{{ url_for('video_yolo') }}";
+            }
+        });
+    }
+    function stopStream() {
+        fetch('/stop_stream').then(response => {
+            if (response.ok) {
+                document.getElementById('liveVideo').src = "";
+                document.getElementById('yoloVideo').src = "";
+            }
+        });
+    }
+</script>
+{% endblock %}
+{% block img %}
+<img class="img-fluid" src="{{url_for('static', filename='images/dashboard.svg')}}" id="left_icon">
+{% endblock %}
+{% else %}
+<!------------------- If Not Admin --------------------------->
+<div>
+    <h1>Wooops!!!</h1>
+    <h3>Olny Admin Can See content of this Page</h3>
+    <img src="../static/images/not_allowed.svg" alt="Not Allowed" height="90%" width="90%">
+</div>
+{% endif %}

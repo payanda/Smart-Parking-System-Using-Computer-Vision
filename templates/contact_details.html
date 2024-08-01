@@ -1,0 +1,85 @@
+{% if current_user.is_admin %}
+{% extends "base2.html" %}
+
+{% block title %} Contact Details {% endblock %}
+
+{% block left_title %}
+<h2>Contact Details</h2>
+{% endblock %}
+
+
+
+{% block img %}
+<img class="img-fluid" src="{{url_for('static', filename='images/details.svg')}}" id="left_icon">
+{% endblock %}
+
+
+{% block right_centent %}
+<h3>Manage Users Informations</h3>
+{% endblock %}
+{% block button %}
+<!-- Button trigger modal -->
+<a href="{{url_for('contact')}}" type="button" class="btn btn-lg btn-outline-success my_shadow">
+    Add Contact
+</a>
+{% endblock %}
+
+{% block table %}
+<!-------------------------------- Table Header Row -------------------------------->
+<thead class="table-dark">
+    <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone No</th>
+        <th>Company</th>
+        <th>Note</th>
+        <th>Subject</th>
+        <th>Type</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<!-------------------------------- Table Body Rows -------------------------------->
+<tbody class="text-center small">
+    {% for row in contacts %}
+    <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.user_id}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.email}}</td>
+        <td>{{row.phone}}</td>
+        <td>{{row.company}}</td>
+        <td>{{row.note}}</td>
+        <td>{{row.subject}}</td>
+        <td>{{row.type_of_feedback}}</td>
+        <td>
+            <div class="btn-group gap-1 ">
+                <a href="{{url_for('update_contact', id=row.id)}}" type="button" class="btn">
+                    <i class="fa-solid fa-pen-to-square fa-xl" style="color: #215fe4;"></i>
+                </a>
+
+                <form action="{{ url_for('delete_contact', id=row.id) }}">
+                    <button class="btn" type="submit"
+                        onclick="return confirm('Are you sure you want to delete this record?')">
+                        <i class="fa-solid fa-trash-can fa-xl" style="color: #e10e0e;"></i>
+                    </button>
+                </form>
+            </div>
+        </td>
+    </tr>
+
+    {% endfor %}
+</tbody>
+{% endblock %}
+
+
+
+{% else %}
+<!------------------- If Not Admin --------------------------->
+<div>
+    <h1>Wooops!!!</h1>
+    <h3>Olny Admin Can See content of this Page</h3>
+    <img src="../static/images/not_allowed.svg" alt="Not Allowed" height="90%" width="90%">
+</div>
+{% endif %}
